@@ -17,8 +17,8 @@ mongoose
     console.log(err);
   });
 
-  app.listen(3010, () => {
-  console.log("Server is running on port http://localhost:3010");
+  app.listen(3000, () => {
+  console.log("Server is running on port http://localhost:3000");
 });
 
 
