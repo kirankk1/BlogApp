@@ -4,12 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signInSuccess, signInStart, signInFailure } from "../redux/user/userSlice";
 
-
 export default function SignIn() {
-  const [formData, setFormData] = useState({});
-  const {loading, error:errorMessage} = useSelector(state => state.user);
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const { loading, error: errorMessage } = useSelector((state) => state.user);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -19,7 +18,7 @@ export default function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      return dispatch(signInFailure('Please fill all the fields'));
+      return dispatch(signInFailure("Please fill all the fields"));
     }
     try {
       dispatch(signInStart());
@@ -30,17 +29,13 @@ export default function SignIn() {
       });
       const data = await res.json();
       if (data.success === false) {
-        dispatch(signInFailure(data.message));
+        return dispatch(signInFailure(data.message));
       }
-      setLoading(false);
-      if(res.ok){
+      if (res.ok) {
         dispatch(signInSuccess(data));
         navigate("/");
       }
-
-      // Handle response data here
     } catch (error) {
-      // Handle error here
       dispatch(signInFailure(error.message));
     }
   };
@@ -57,8 +52,8 @@ export default function SignIn() {
             Blog
           </Link>
           <p className="text-sm mt-5">
-            You can SignIn with your email and password or google to start using
-            blog application.
+            You can Sign In with your email and password or Google to start using
+            the blog application.
           </p>
         </div>
         {/* right */}
@@ -84,19 +79,19 @@ export default function SignIn() {
                 onChange={handleChange}
               />
             </div>
-            <Button gradientDuoTone="purpleToPink" type="submit" disabled={loading} >
-              {
-                loading ? (
-                  <>
-                    <Spinner size='sm'/>
-                    <span className="pl-3">Loading...</span>
-                  </>
-                ): 'Sign In'
-              }  
+            <Button gradientDuoTone="purpleToPink" type="submit" disabled={loading}>
+              {loading ? (
+                <>
+                  <Spinner size="sm" />
+                  <span className="pl-3">Loading...</span>
+                </>
+              ) : (
+                "Sign In"
+              )}
             </Button>
           </form>
           <div className="flex gap-2 text-sm mt-5">
-            <span>Don't Have an account?</span>
+            <span>Don't have an account?</span>
             <Link to="/sign-up" className="text-blue-500">
               Sign Up
             </Link>
