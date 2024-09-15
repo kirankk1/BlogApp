@@ -9,20 +9,20 @@ export default function Dashboard() {
   const [tab, setTab] = useState('')
   useEffect(()=>{
     const urlParams = new URLSearchParams(location.search)
-    const tabFromUrl = urlParams.get('tab')
+    const tabFromUrl = urlParams.get('tab')?.trim();
     if(tabFromUrl){
       setTab(tabFromUrl)
     }
   },[location.search])
 
   return (
-    <div>
-      <div className="min-h-screen flex flex-col md:flex-row">
+    <div className="min-h-screen flex flex-col md:flex-row">
+      <div className="w-full md:w-56 md:flex">
       {/*Sidebar */ }
       <DashSidebar/>
       </div>
       {/*profile.. */}
-      {tab === 'profile' && <DashProfile/>}
+      {tab ==='profile' && <DashProfile/>}
     </div>
   )
 }
