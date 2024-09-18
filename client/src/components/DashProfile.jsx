@@ -229,6 +229,7 @@ export default function DashProfile() {
         <Button type="submit" gradientDuoTone="purpleToBlue" outline>
           Update
         </Button>
+        
       </form>
       <div className="text-red-500 flex justify-between mt-5">
         <span className="cursor-pointer" onClick={() => setShowModal(true)}>
