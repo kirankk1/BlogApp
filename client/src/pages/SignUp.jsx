@@ -1,6 +1,7 @@
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import KiranBlog from '../assets/images/KiranBlog.png'
 import OAuth from "../components/OAuth";
 
 export default function SignUp() {
@@ -34,8 +35,7 @@ export default function SignUp() {
       if(res.ok){
         navigate("/sign-in");
       }
-
-      // Handle response data here
+  
     } catch (error) {
       // Handle error here
       setErrorMessage(error.message);
@@ -49,12 +49,10 @@ export default function SignUp() {
         {/* left */}
         <div className="flex-1">
           <Link to="/" className="font-bold dark:text-white text-4xl">
-            <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white ">
-              Kiran's
-            </span>
-            Blog
+          <img className="w-64" src={KiranBlog} />
+
           </Link>
-          <p className="text-sm mt-5">
+          <p className="text-sm">
             You can signup with your email and password or google to start using
             blog application.
           </p>

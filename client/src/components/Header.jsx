@@ -13,6 +13,7 @@ import { FaMoon } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
 import { signoutSuccess } from "../redux/user/userSlice";
+import KiranBlog from '../assets/images/KiranBlog.png'
 
 export default function Header() {
   const path = useLocation().pathname;
@@ -61,10 +62,7 @@ export default function Header() {
         to="/"
         className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
       >
-        <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white ">
-          Kiran's
-        </span>
-        Blog
+        <img className="w-48" src={KiranBlog} />
       </Link>
       <form onSubmit={handleSubmit}>
         <TextInput
@@ -76,28 +74,6 @@ export default function Header() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </form>
-      {/* <div
-        className="relative lg:hidden"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        {!isHovered ? (
-          <Button className="w-10 h-9" color="gray" pill>
-            <AiOutlineSearch />
-          </Button>
-        ) : (
-          <form onSubmit={handleSubmit} className="absolute top-0 left-0 z-50">
-            <TextInput
-              type="text"
-              placeholder="Search..."
-              className="w-48 transition-all duration-300 ease-in-out"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              autoFocus
-            />
-          </form>
-        )}
-      </div> */}
       <div
         className=""
         onMouseEnter={() => setIsHovered(true)}
