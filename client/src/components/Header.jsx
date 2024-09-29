@@ -14,24 +14,22 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
 import { signoutSuccess } from "../redux/user/userSlice";
 
-
-
 export default function Header() {
   const path = useLocation().pathname;
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
-  const [searchTerm, setSearchTerm ] = useState('')
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isHovered, setIsHovered] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
 
-  useEffect(()=>{
+  useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    const searchTermFromUrl = urlParams.get('searchTerm');
-    if(searchTermFromUrl){
+    const searchTermFromUrl = urlParams.get("searchTerm");
+    if (searchTermFromUrl) {
       setSearchTerm(searchTermFromUrl);
     }
-  },[location.search])
+  }, [location.search]);
 
   const handleSignout = async () => {
     try {
@@ -49,14 +47,13 @@ export default function Header() {
     }
   };
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(location.search);
-    urlParams.set('searchTerm', searchTerm);
+    urlParams.set("searchTerm", searchTerm);
     const searchQuery = urlParams.toString();
-    navigate(`/search?${searchQuery}`)
-
-  }
+    navigate(`/search?${searchQuery}`);
+  };
 
   return (
     <Navbar className="border-b-2">
@@ -69,19 +66,61 @@ export default function Header() {
         </span>
         Blog
       </Link>
-      <form  onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <TextInput
           placeholder="Search"
           type="text"
           rightIcon={AiOutlineSearch}
-          className="hidden lg:inline" 
+          className="hidden lg:inline"
           value={searchTerm}
-          onChange={(e)=> setSearchTerm(e.target.value)}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </form>
-      <Button className="w-10 h-9 lg:hidden" color="gray" pill>
-        <AiOutlineSearch />
-      </Button>
+      {/* <div
+        className="relative lg:hidden"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {!isHovered ? (
+          <Button className="w-10 h-9" color="gray" pill>
+            <AiOutlineSearch />
+          </Button>
+        ) : (
+          <form onSubmit={handleSubmit} className="absolute top-0 left-0 z-50">
+            <TextInput
+              type="text"
+              placeholder="Search..."
+              className="w-48 transition-all duration-300 ease-in-out"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              autoFocus
+            />
+          </form>
+        )}
+      </div> */}
+      <div
+        className=""
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {!isHovered ? (
+          <Button className="w-10 h-9 lg:hidden" color="gray" pill>
+            <AiOutlineSearch />
+          </Button>
+        ) : (
+            <form onSubmit={handleSubmit}>
+              <TextInput
+                placeholder="Search"
+                type="text"
+                rightIcon={AiOutlineSearch}
+                className=""
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </form>
+        )}
+      </div>
+
       <div className="flex gap-2 md:order-2">
         <Button
           className="w-12 h-10 hidden sm:inline"
@@ -99,7 +138,7 @@ export default function Header() {
               <Avatar
                 alt="User Avatar"
                 img={currentUser.profilePicture}
-                rounded 
+                rounded
               />
             }
           >
