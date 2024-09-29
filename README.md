@@ -67,7 +67,7 @@ These credentials are required for connecting to MongoDB and enabling Google OAu
 
 ### 1. Clone the repository:
 
-git clone https://github.com/your-username/kirans-blog.git
+git clone https://github.com/kirankk1/BlogApp.git
 2. Install Dependencies:
 Backend:
 bash
